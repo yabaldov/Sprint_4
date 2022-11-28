@@ -1,10 +1,7 @@
 package org.example;
 
-import org.example.pageobjects.MainPageScooter;
-import org.example.pageobjects.OrderPageScooter;
+import org.example.pageobjects.OrderPage;
 import org.hamcrest.MatcherAssert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -12,13 +9,9 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 @RunWith(Parameterized.class)
-public class OrderTest {
-
-    private WebDriver driver;
+public class OrderTest extends BaseTest {
 
     private final String firstName;
     private final String secondName;
@@ -46,20 +39,10 @@ public class OrderTest {
         this.period = period;
     }
 
-    @Before
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
-
     @Parameterized.Parameters
     public static Object[][] getOrderData() {
         return new Object[][] {
+                {"Фёдор", "Перестукин", "Ленина ул., д. 1", "Сокольники", "+79905554433", "01.12.2022", "двое суток"},
                 {"Виктор", "Полесов", "Перелешинский пер., д. 7", "Библиотека имени Ленина", "+79995554433", "01.01.2023", "семеро суток"},
                 {"Елена", "Грицацуева", "Плеханова ул., д. 100", "Маяковская", "+79995554434", "27.04.1927", "сутки"},
                 {"Иван", "Востриков", "Тов. Губернского ул., д. 1", "Спортивная", "+79985554430", "28.11.2022", "четверо суток"},
@@ -69,10 +52,8 @@ public class OrderTest {
     @Test
     public void shouldPlaceOrderSuccessfully() {
         // Arrange
-        MainPageScooter objMainPage = new MainPageScooter(driver);
         objMainPage.clickTopOrderButton();
-
-        OrderPageScooter objOrderPage = new OrderPageScooter(driver);
+        OrderPage objOrderPage = new OrderPage(driver);
 
         // Act
         objOrderPage.fillWhoIsTheScooterFor(firstName, secondName, address, subwayStation, phone);

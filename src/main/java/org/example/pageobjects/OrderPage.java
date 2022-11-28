@@ -8,48 +8,48 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Класс страницы заказа самоката
-public class OrderPageScooter {
+public class OrderPage {
 
     private final WebDriver driver;
 
     // Поле ввода для имени
-    By inputFirstName = By.xpath("//input[contains(@placeholder, 'Имя')]");
+    private final By inputFirstName = By.xpath("//input[contains(@placeholder, 'Имя')]");
     // Поле ввода для фамилии
-    By inputSecondName = By.xpath("//input[contains(@placeholder, 'Фамилия')]");
+    private final By inputSecondName = By.xpath("//input[contains(@placeholder, 'Фамилия')]");
     // Поле ввода для адреса
-    By inputAddress = By.xpath("//input[contains(@placeholder, 'Адрес')]");
+    private final By inputAddress = By.xpath("//input[contains(@placeholder, 'Адрес')]");
     // Поле для выбора станции метро
-    By inputSelectSubwayStation = By.xpath("//input[contains(@placeholder, 'Станция метро')]");
-    By subwayStationsList = By.className("select-search__select");
+    private final By inputSelectSubwayStation = By.xpath("//input[contains(@placeholder, 'Станция метро')]");
+    private final By subwayStationsListTop = By.xpath("//div[@class='select-search__select']//div[1]");
     // Поле ввода для телефона
-    By inputPhone = By.xpath("//input[contains(@placeholder, 'Телефон')]");
+    private final By inputPhone = By.xpath("//input[contains(@placeholder, 'Телефон')]");
     // Кнопка "Далее"
-    By orderNextButton = By.xpath("//button[text()='Далее']");
+    private final By orderNextButton = By.xpath("//button[text()='Далее']");
 
     // Заголовок "Про аренду"
-    By orderHeaderAboutRent = By.xpath("//div[text()='Про аренду']");
+    private final By orderHeaderAboutRent = By.xpath("//div[text()='Про аренду']");
     // Поле ввода "Когда привезти самокат"
-    By inputWhen = By.xpath("//input[contains(@placeholder, 'Когда')]");
-    By datePickerDaySelected = By.xpath("//div[contains(@class,'react-datepicker__day--selected')]");
+    private final By inputWhen = By.xpath("//input[contains(@placeholder, 'Когда')]");
+    private final By datePickerDaySelected = By.xpath("//div[contains(@class,'react-datepicker__day--selected')]");
     // Поле ввода "Срок аренды"
-    By inputRentalPeriod = By.xpath("//div[contains(@class,'Dropdown-placeholder') and contains(text(),'Срок аренды')]");
+    private final By inputRentalPeriod = By.xpath("//div[contains(@class,'Dropdown-placeholder') and contains(text(),'Срок аренды')]");
     // Выбор "Цвет самоката"
     // Поле ввода "Комментарий для курьера"
     // Кнопка формы "Заказать"
-    By placeOrderButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']");
+    private final By placeOrderButton = By.xpath("//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']");
 
     // Заголовок модального окна "Хотите оформить заказ?"
-    By orderModalHeaderConfirm = By.xpath("//div[contains(text(), 'Хотите оформить заказ?')]");
+    private final By orderModalHeaderConfirm = By.xpath("//div[contains(text(), 'Хотите оформить заказ?')]");
     //Кнопка подтверждения заказа "Да"
-    By orderModalYesButton = By.xpath("//button[text()='Да']");
+    private final By orderModalYesButton = By.xpath("//button[text()='Да']");
 
     // Заголовок модального окна "Заказ оформлен"
-    By orderModalHeaderOrderCompleted = By.xpath("//div[contains(text(), 'Заказ оформлен')]");
+    private final By orderModalHeaderOrderCompleted = By.xpath("//div[contains(text(), 'Заказ оформлен')]");
     // Текст модального окна "Заказ оформлен"
-    By orderModalCompletedText = By.className("Order_Text__2broi");
+    private final By orderModalCompletedText = By.className("Order_Text__2broi");
 
 
-    public OrderPageScooter(WebDriver driver) {
+    public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -67,7 +67,7 @@ public class OrderPageScooter {
 
     public void setSubwayStation(String subwayStation) {
         driver.findElement(inputSelectSubwayStation).sendKeys(subwayStation);
-        driver.findElement(subwayStationsList).click();
+        driver.findElement(subwayStationsListTop).click();
     }
 
     public void setInputPhone(String phone) {

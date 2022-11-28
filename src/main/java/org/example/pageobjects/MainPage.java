@@ -7,9 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Класс главной страницы
-public class MainPageScooter {
+public class MainPage {
 
     private final WebDriver driver;
+    private final String siteUrl = "https://qa-scooter.praktikum-services.ru/";
+
+    // И здесь куки! Кнопка "да все привыкли"
+    private final By yesEveryoneOkButton = By.id("rcc-confirm-button");
 
     // Заголовок раздела "Вопросы о важном"
     private final By mainQuestionsSection = By.xpath("//div[text()='Вопросы о важном']");
@@ -39,8 +43,13 @@ public class MainPageScooter {
     private final By topOrderButton = By.xpath("//div[@class='Header_Nav__AGCXC']/button[text()='Заказать']");
     private final By bottomOrderButton = By.xpath("//div[@class='Home_FinishButton__1_cWm']/button[text()='Заказать']");
 
-    public MainPageScooter(WebDriver driver) {
+    public MainPage(WebDriver driver) {
         this.driver = driver;
+        this.driver.get(siteUrl);
+    }
+
+    public void clickYesEveryoneOkButton() {
+        driver.findElement(yesEveryoneOkButton).click();
     }
 
     public void scrollToMainQuestions() {

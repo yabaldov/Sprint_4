@@ -1,37 +1,20 @@
 package org.example;
 
-import org.example.pageobjects.MainPageScooter;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import org.hamcrest.MatcherAssert;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 @RunWith(Parameterized.class)
-public class MainQuestionsTest {
+public class MainQuestionsTest extends BaseTest {
 
-    private WebDriver driver;
     private final int questionNumber;
     private final String answerExpected;
 
     public MainQuestionsTest(int questionNumber, String answerExpected) {
         this.questionNumber = questionNumber;
         this.answerExpected = answerExpected;
-    }
-
-    @Before
-    public void setup() {
-        driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 
     @Parameterized.Parameters
@@ -51,7 +34,6 @@ public class MainQuestionsTest {
     @Test
     public void shouldBeRightAnswerToMainQuestion() {
         // Arrange
-        MainPageScooter objMainPage = new MainPageScooter(driver);
         // Act
         objMainPage.scrollToMainQuestions();
         objMainPage.clickQuestion(questionNumber);
